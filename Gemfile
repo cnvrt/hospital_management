@@ -19,7 +19,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
-gem 'psych', '~> 4.0' # or another compatible version
+gem 'psych', '~> 5.1' # or another compatible version
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
