@@ -1,0 +1,84 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container" style=" height: 80vh; ">
+  <h2 style="display:none;">Patients Registered Per Day</h2>
+  <canvas style="display:none;" id="patientsChart" width="400" height="200"></canvas>
+
+  <h2>Patients Registered in the Last 7 Days</h2>
+  <div style="position: absolute; display: inline-grid; right: 0;">
+    <button onclick="createChart('bar')" class="btn btn-primary">Bar Chart</button>
+    <button onclick="createChart('line')" class="btn btn-secondary">Line Chart</button>
+    <button onclick="createChart('pie')" class="btn btn-success">Pie Chart</button>
+    <button onclick="createChart('doughnut')" class="btn btn-info">Doughnut Chart</button>
+    <button onclick="createChart('polarArea')" class="btn btn-warning">PolarArea Chart</button>
+    <button onclick="createChart('radar')" class="btn btn-danger">Radar Chart</button>
+    <%= link_to 'Back', doctor_path, class: 'btn btn-dark' %>
+  </div>
+  <canvas id="patientsChart2" width="400" height="200"></canvas>
+
+  <script>
+    const ctx = document.getElementById('patientsChart').getContext('2d');
+    
+    const labels = <%= raw @patients_per_day.keys.to_json %>;
+    const data = <%= raw @patients_per_day.values.to_json %>;
+
+    const patientsChart1 = new Chart(ctx, {
+      type: 'bar', // You can change this to 'bar', 'pie', etc.
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Number of Patients',
+          data: data,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    let patientsChart;
+    function createChart(chartType) {
+        const ctx = document.getElementById('patientsChart2').getContext('2d');
+        
+        const labels = <%= raw @labels.to_json %>;
+        const data = <%= raw @patients_per_days.values.to_json %>;
+
+        if (patientsChart) {
+        patientsChart.destroy(); // Destroy the existing chart
+        }
+
+        patientsChart = new Chart(ctx, {
+        type: chartType, // Use the chart type passed to the function
+        data: {
+            labels: labels,
+            datasets: [{
+            label: 'Number of Patients',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }});
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        createChart('bar'); // Initialize with bar chart
+    });
+  </script>
+</div>

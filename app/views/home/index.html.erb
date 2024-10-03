@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Welcome to Healthcare Portal</h1>
+  <% if user_signed_in? %>
+
+    <% if current_user.doctor? %>
+      <p>Welcome, Doctor!</p>
+    <% elsif current_user.receptionist? %>
+      <p>Welcome, Receptionist!</p>
+    <% end %>
+    
+    <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
+  <% end %>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2>Patients List</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <td><%= patient.id %></td>
+          <td><%= patient.name %></td>
+          <td><%= patient.age %></td>
+          <td><%= patient.gender %></td>
+          <td><%= patient.created_at.strftime("%Y-%m-%d") %></td>
+          <td><a class="btn btn-primary" href="/doctors_patient/<%= patient.id %>">Attend</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Graph Dashboard', doctor_dashboard_path, class: 'btn btn-primary' %>
+</div>

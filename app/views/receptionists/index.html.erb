@@ -1,0 +1,35 @@
+<style>
+  td>div>a { margin: 5px; }
+</style>
+<div class="container">
+  <h1>Registered Patients</h1>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <td><%= patient.name %></td>
+          <td><%= patient.age %></td>
+          <td><%= patient.gender %></td>
+          <td>
+            <div style="display: inline-flex;">
+              <%= link_to 'Show', patient %>
+              <%= link_to 'Edit', edit_patient_path(patient) %>
+              <%= button_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Register New Patient', new_receptionist_path, class: 'btn btn-primary' %>
+</div>
