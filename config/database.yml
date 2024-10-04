@@ -83,5 +83,4 @@ test:
 production:
   <<: *default
   database: hospital_management_production
-  username: hospital_management
   password: <%= ENV["HOSPITAL_MANAGEMENT_DATABASE_PASSWORD"] %>
